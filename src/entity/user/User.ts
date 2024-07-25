@@ -18,6 +18,6 @@ export class User {
     @Column()
     startDate: Date = new Date();
 
-    @Column()
-    endDate: Date | undefined;
+    @Column({ type: 'datetime', nullable: true })
+    endDate: Date | null = null;
 }
