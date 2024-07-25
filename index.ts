@@ -1,11 +1,14 @@
-import { createConnection } from 'typeorm';
 const { server, app } = require('./app');
+import { myDataSource } from './src/app-data-source';
 
-createConnection().then(() => {
-    console.log('Database connected');
-}).catch((error) => {
-    console.log('Occurs', error);
-});
+myDataSource
+    .initialize()
+    .then(() => {
+        console.log("Data Source has been initialized!")
+    })
+    .catch((err) => {
+        //console.error("Error during Data Source initialization:", err)
+    })
 
 server.listen(app.get('port'), () => {
     console.log(`Server is running on port ${app.get('port')}`);

@@ -4,7 +4,7 @@ import { User } from "../user/User"; // Asegúrate de ajustar la ruta de importa
 @Entity('rooms')
 export class Room {
     @PrimaryGeneratedColumn()
-    id: number = 0;
+    id: number | undefined;
 
     @Column({type: 'boolean', default: true})
     isAvailable: boolean = true;

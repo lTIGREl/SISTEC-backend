@@ -6,16 +6,16 @@ export class User {
     @PrimaryGeneratedColumn()
     id: number = 0;
 
-    @Column()
-    firstName: string = "";
+    @Column({ nullable: false })
+    name: string = "";
 
-    @Column()
+    @Column({ nullable: false })
     idNumber: string = "";
 
     @OneToOne(() => Room, room => room.occupiedBy)
     room: Room | undefined;
 
-    @Column()
+    @Column({ nullable: false })
     startDate: Date = new Date();
 
     @Column({ type: 'datetime', nullable: true })
