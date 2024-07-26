@@ -1,7 +1,6 @@
 const { server, app } = require('./app');
 import { myDataSource } from './src/app-data-source';
 import { createDatabase, createTables } from './script';
-require('./script');
 createDatabase().then(() => {
     createTables().then(() => {
 
