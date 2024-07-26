@@ -1,5 +1,6 @@
 import { DataSource } from "typeorm";
 import mysql from "mysql2/promise";
+import { Room } from "./src/entities/room/Room";
 require('dotenv').config();
 
 export async function createDatabase() {
@@ -16,8 +17,9 @@ export async function createDatabase() {
 export async function createTables() {
     myDataSource
     .initialize()
-    .then(() => {
+    .then(async () => {
         //console.log("Data Source has been initialized temporal!")
+        await insertRooms(myDataSource, 5); // Inserta 5 habitaciones
         return myDataSource.destroy();
     })
     .catch((err) => {
@@ -35,6 +37,20 @@ const myDataSource = new DataSource({
     synchronize: true,
     logging: false,
 });
+async function insertRooms(dataSource: DataSource, numberOfRooms: number) {
+    const roomRepository = dataSource.getRepository(Room);
+
+    const rooms = [];
+    for (let i = 0; i < numberOfRooms; i++) {
+        const room = new Room();
+        room.isAvailable = true;
+        room.occupiedBy = null;
+        rooms.push(room);
+    }
+
+    await roomRepository.save(rooms);
+    console.log(`${numberOfRooms} rooms have been inserted.`);
+}
 
 
 
