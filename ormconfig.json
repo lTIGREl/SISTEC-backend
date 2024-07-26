@@ -5,7 +5,7 @@
     "username": "root",
     "password": "Admin12345_",
     "database": "SISTEC",
-    "synchronize": true,
+    "synchronize": false,
     "logging": false,
     "entities": [
       "src/entities/**/*.ts"

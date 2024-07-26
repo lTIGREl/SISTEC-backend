@@ -12,9 +12,6 @@ export class User {
     @Column({ nullable: false })
     idNumber: string = "";
 
-    @OneToOne(() => Room, room => room.occupiedBy)
-    room: Room | undefined;
-
     @Column({ nullable: false })
     startDate: Date = new Date();
 

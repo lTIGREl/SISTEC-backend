@@ -2,11 +2,13 @@ import express from 'express';
 
 import UsersRouter from './users.router';
 import RoomsRouter from './rooms.router';
+import InfoRouter from './info.router';
 
 const endpoints = {
     baseApi: '/api',
     users: '/users',
-    rooms: '/rooms'
+    rooms: '/rooms',
+    info: '/info'
 }
 
 function routerApi(app: any){
@@ -14,6 +16,7 @@ function routerApi(app: any){
     app.use(endpoints.baseApi, router);
     router.use(endpoints.users, UsersRouter);
     router.use(endpoints.rooms, RoomsRouter);
+    router.use(endpoints.info, InfoRouter);
 }
 
 module.exports = {routerApi, endpoints};

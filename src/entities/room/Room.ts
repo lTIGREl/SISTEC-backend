@@ -4,12 +4,12 @@ import { User } from "../user/User"; // Asegúrate de ajustar la ruta de importa
 @Entity('rooms')
 export class Room {
     @PrimaryGeneratedColumn()
-    id: number | undefined;
+    id: number = 0;
 
-    @Column({type: 'boolean', default: true})
+    @Column({default: true})
     isAvailable: boolean = true;
 
-    @OneToOne(() => User, user => user.room)
+    @OneToOne(() => User, user => user.id, { eager: true })
     @JoinColumn({ name: "occupiedBy" })
-    occupiedBy: User | undefined;
+    occupiedBy: User | null = null;
 }

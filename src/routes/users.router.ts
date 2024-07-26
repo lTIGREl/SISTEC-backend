@@ -1,9 +1,13 @@
 import express, { Request, Response } from 'express';
 import UserService from '../services/userService';
+import RoomService from '../services/roomService';
+import RegisterService from '../services/registerService';
 import { User } from '../entities/user/User';
 
 const router = express.Router();
 const userService = new UserService();
+const roomService = new RoomService();
+const registerService = new RegisterService();
 
 router.get('/', async (req: Request, res: Response) => {
     try {
@@ -32,6 +36,7 @@ router.post('/', async (req: Request, res: Response) => {
     const newUser: User = req.body;
     try {
         const createdUser = await userService.createUser(newUser);
+        await registerService.assignRoomToUser(createdUser!.id, req.body.room);
         res.status(201).json(createdUser);
     } catch (error) {
         res.status(500).json({ message: 'Internal server error' });
